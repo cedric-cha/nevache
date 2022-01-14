@@ -96,11 +96,12 @@
                 textDiv.textContent = properties[i].titre;
                 textDiv2.textContent = properties[i].capacite + ' RSV';
 
+                var link = 'http://127.0.0.1:8000'
 
                 var a = document.createElement('a');
-                a.href= 'http://127.0.0.1:8000/details/' + properties[i].id
+                a.href= link + '/details/' + properties[i].id;
                 /* Image */
-                childdiv.src = 'http://127.0.0.1:8000/storage/img/' + properties[i].image; 
+                childdiv.src = link + '/storage/img/' + properties[i].image; 
                 childdiv.style.top = (y + totalOffset).toString() + "px";
                 childdiv.style.left = (x + totalOffset).toString() + "px";
                 /* Texte */
