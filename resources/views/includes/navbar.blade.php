@@ -34,7 +34,7 @@
                         </form>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link" href="{{ url('/admin') }}">{{ __('Admin') }}</a>
+                        <a  class="nav-link" href="{{ url('/admin') }}">{{ __('Dashboard') }}</a>
                     </li>
                 @endguest
             </ul>
