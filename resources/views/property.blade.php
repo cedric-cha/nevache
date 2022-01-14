@@ -5,6 +5,11 @@
     @section('contenu')
     
         <div class="mb-10 offset-md-2 col-lg-8 col-md-8 col-lg-8 col-sm-8 top-index"><br><br><br><br>
+            <!-- <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="btn btn-secondary" href="{{ url('/admin') }}" role="button">Retour</a>
+            </div> -->
+            
+            <a class="btn btn-secondary mt-5" href="{{ url('/home') }}" role="button">Retour</a>
             <div class="row mb-5 mt-10 text-end offset-md-3">
                 <!-- <label class="col-md-3 col-form-label" for="image">Image :</label> -->
                 <div class="col-lg-8 col-md-8 col-sm-8" style="justify-content:center;"> 

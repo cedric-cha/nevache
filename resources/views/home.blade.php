@@ -88,7 +88,6 @@
                 var x = Math.cos((div * i) * (Math.PI / 180)) * radius;
                 childdiv.className = 'childDiv';
                 childdiv.style.position = 'absolute';
-                // childdiv.onmouseover= function(image){ image.style.borderRadius= "2px";  };
                 textDiv.style.position = 'absolute';
                 textDiv2.style.position = 'absolute';
                 textDiv.style.justifyContent = 'center';
@@ -106,9 +105,9 @@
                 childdiv.style.left = (x + totalOffset).toString() + "px";
                 /* Texte */
                 textDiv.style.top = (y + totalOffset + 25).toString() + "px" ;
-                textDiv.style.left = (x + totalOffset + 60).toString() + "px";
+                textDiv.style.left = (x + totalOffset + 50).toString() + "px";
                 textDiv2.style.top = (y + totalOffset + 150).toString() + "px" ;
-                textDiv2.style.left = (x + totalOffset + 65).toString() + "px";
+                textDiv2.style.left = (x + totalOffset + 60).toString() + "px";
                 
                 a.appendChild(childdiv);
                 _div.appendChild(a);

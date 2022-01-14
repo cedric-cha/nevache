@@ -30,9 +30,9 @@
         <link href="https://cdn.syncfusion.com/ej2/ej2-buttons/styles/material.css" rel="stylesheet">
         <link href="https://cdn.syncfusion.com/ej2/ej2-calendars/styles/material.css" rel="stylesheet">
         <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script> 
-         
+<!--          
         <script src = "ej/ej.web.all.min.js" ></script>  
-        <script src = "ej/ej.webform.min.js" ></script>  
+        <script src = "ej/ej.webform.min.js" ></script>   -->
         
         
     </head>
