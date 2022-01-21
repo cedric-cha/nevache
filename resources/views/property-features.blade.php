@@ -1,4 +1,3 @@
-
     <div>
         <div class="row mb-3 text-end">
             <label class="col-sm-3 inline col-form-label" for="titre">Titre de l'annonce :</label>
@@ -13,15 +12,45 @@
             </div>
         </div>
         <div class="row mb-3 inline text-end">
+            <label class="col-md-3 col-form-label" for="photos">Photos :</label>
+            <div class="col-lg-8 col-md-8 col-sm-8" style="justify-content:center;">
+                <input type="file" class="form-control" name="photos[]" id="photos" accept="photos/png, photos/jpeg, photos/jpg" multiple>
+            </div>
+        </div>
+        <div class="row mb-3 inline text-end">
             <label class="col-sm-3 col-form-label" for="description">Description :</label>
             <div class="col-lg-8 col-md-8 col-sm-8">
                 <input type="text" class="form-control" placeholder="Entrez la description" name="description" id="description">
             </div>
         </div>
         <div class="row mb-3 inline text-end">
-            <label class="col-sm-3 col-form-label" for="capacite">Capacité :</label>
+            <label class="col-sm-3 col-form-label" for="tarifs">Capacité :</label>
             <div class="col-lg-8 col-md-8 col-sm-8">
                 <input type="text" class="form-control" placeholder="Entrez la capacité" name="capacite" id="capacite">
+            </div>
+        </div>
+        <div class="row mb-3 inline text-end">
+            <label class="col-sm-3 col-form-label" for="tarifs">Tarif :</label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <input type="text" class="form-control" placeholder="Entrez le tarif" name="tarifs" id="tarifs">
+            </div>
+        </div>
+        <div class="row mb-3 inline text-end">
+            <label class="col-sm-3 col-form-label" for="taxes_sejour">Taxe de séjour :</label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <input type="text" class="form-control" placeholder="Entrez la taxe de séjour" name="taxes_sejour" id="taxes_sejour">
+            </div>
+        </div>
+        <div class="row mb-3 inline text-end">
+            <label class="col-sm-3 col-form-label" for="options_possibles">Options possibles :</label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <input type="text" class="form-control" placeholder="Entrez une autre option" name="options_possibles" id="options_possibles">
+            </div>
+        </div>
+        <div class="row mb-3 inline text-end">
+            <label class="col-sm-3 col-form-label" for="autre_option">Autre option :</label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <input type="text" class="form-control" placeholder="Entrez une autre option" name="autre_option" id="autre_option">
             </div>
         </div>
         <div class="row mb-3 inline text-end">
@@ -938,14 +967,12 @@
         <script>
 
             let dates = []
-                
             var calendar = new ej.calendars.Calendar({
-            isMultiSelection: true,
-            values: [new Date()]
-
+                isMultiSelection: true,
+                values: [new Date()]
             });
-            calendar.appendTo('#element');
 
+            calendar.appendTo('#element');
             calendar.addEventListener("change", e => {
             Array.from(e.values).map(date => dates.push(moment(date).format("YYYY/MM/DD")))
             })
@@ -956,10 +983,7 @@
             let formData = new FormData(document.querySelector('#storeProperty'))
             formData.append('dates', dates)
 
-            fetch("{{ route('sauvegarde') }}", {
-                method: 'post',
-                body: formData
-            })
+            fetch("{{ route('sauvegarde') }}", { method: 'post', body: formData })
                 .then(res => res.json())
                 .then(data => {
                     setTimeout(() => {
@@ -972,7 +996,6 @@
                     document.location.href = data.redirect
                     }, 2000);
                 })
-
             })
 
         </script>

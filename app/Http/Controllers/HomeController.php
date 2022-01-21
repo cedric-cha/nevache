@@ -28,6 +28,7 @@ class HomeController extends Controller
         $properties = Property::all() ;
 
         $properties->map(function ($property) {
+            $property->photos = json_decode($property->photos);
             $property->tag = json_decode($property->tag);
             $property->dates = json_decode($property->dates);
 

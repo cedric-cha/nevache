@@ -12,6 +12,7 @@
  */
 
  /* Example - styles */
+ 
 .content {
   position: relative;
   text-align: center;
@@ -662,8 +663,8 @@ progress {
   width: 200px;
   height: 200px;
   border-radius: 300px;
-  margin: 105px;
-  padding: 29%;
+  margin: 200px;
+  padding: 15%;
 }
 
 .childDiv {
@@ -694,7 +695,7 @@ progress {
   }
   .page-section-circle {
     padding: 30%;
-    margin-top: 10%;
+    /* margin-top: 10%; */
   }
   #parentdiv {
     display: none;
@@ -707,7 +708,7 @@ progress {
   }
   .page-section-circle {
     padding: 30%;
-    margin-top: 10%;
+    /* margin-top: 10%; */
   }
   #parentdiv {
     display: none;
@@ -11435,8 +11436,11 @@ p {
 }
 
 .page-section-circle {
-  padding: 18%;
-  margin-block-end: 10%;
+  padding: 20%;
+  padding-block-end: 30%;
+  padding-block-start: 20%;
+  /* margin-block-end: 15%; */
+  background-color: #B0F2B6;
 }
 .page-section {
   padding: 2rem 0;
@@ -11548,7 +11552,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/header-bg.jpg");
+  background-image: url("../assets/img/header-bg.jpeg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;

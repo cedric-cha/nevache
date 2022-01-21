@@ -14,7 +14,7 @@
                     </button>
                 </div>
                 <div class="tab-pane show active fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                    <form action="{{ route('updated', $property->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('updated', $property->id) }}" method="POST" enctype="multipart/form-data" id="updateProperty">
                         @csrf       
                         @method('patch')
 
@@ -32,6 +32,23 @@
                                     <img class="mt-3" src="{{ url('storage/img/'.$property->image) }}" width="70px" height="70px" alt="image">
                                 </div>
                             </div>
+                            @php
+                                $photos = json_decode($property->photos);
+                            @endphp
+                            <div class="row mb-3 inline text-end">
+                                <label class="col-md-3 col-form-label" for="photos">Photos :</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8 d-inline" style="justify-content:center;"> 
+                                    <input type="file" class="form-control" name="photos[]" id="photos" accept="image/png, image/jpeg" multiple value="{{asset('storage/photos/'.$property->photos)}}">
+                                    @foreach($photos as $key => $photo)
+                                        <!-- <div class="col mb-2"> -->
+                                            <img class="mt-3" src="{{ url('storage/photos/'.$photo) }}" width="70px" height="70px" alt="image">
+                                            <button type="button" class="btn btn-danger btn-sm deletePhoto" data-photo="{{ $key }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        <!-- </div> -->
+                                    @endforeach
+                                </div>
+                            </div>
                             <div class="row mb-3 inline text-end">
                                 <label class="col-sm-3 col-form-label" for="description">Description :</label>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
@@ -42,6 +59,30 @@
                                 <label class="col-sm-3 col-form-label" for="capacite">Capacité :</label>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                     <input type="text" class="form-control" placeholder="Entrez la capacite" name="capacite" id="capacite" value="{{ $property->capacite }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3 inline text-end">
+                                <label class="col-sm-3 col-form-label" for="capacite">Tarif :</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Entrez le tarif" name="tarifs" id="tarifs" value="{{ $property->tarifs }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3 inline text-end">
+                                <label class="col-sm-3 col-form-label" for="taxes_sejour">Taxe de séjour :</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Entrez la taxe de séjour" name="taxes_sejour" id="taxes_sejour" value="{{ $property->taxes_sejour }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3 inline text-end">
+                                <label class="col-sm-3 col-form-label" for="options_possibles">Options possibles :</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Entrez la capacite" name="options_possibles" id="options_possibles" value="{{ $property->options_possibles }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3 inline text-end">
+                                <label class="col-sm-3 col-form-label" for="autre_option">Autre option :</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Entrez une autre option" name="autre_option" id="autre_option" value="{{ $property->autre_option }}">
                                 </div>
                             </div>
                             
@@ -63,7 +104,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" id="seche-cheveux" value="seche-cheveux" @if(in_array("seche-cheveux", $tag)) checked="" @endif>
-                                                        <label for="">
+                                                        <label for="seche-cheveux">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -80,7 +121,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="produit" id="produit" @if(in_array("produit", $tag)) checked="" @endif>
-                                                        <label>
+                                                            <label for="produit">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                              aria-hidden="true" role="presentation" focusable="false" 
                                                              style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -95,7 +136,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="shampoing" id="shampoing" @if(in_array("shampoing", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="shampoing">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -112,7 +153,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="douche-exterieure" id="douche-exterieure" @if(in_array("douche-exterieure", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="douche-exterieure">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                              aria-hidden="true" role="presentation" focusable="false" 
                                                              style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -128,7 +169,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="eau-chaude" id="eau-chaude" @if(in_array("eau-chaude", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="eau-chaude">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -145,7 +186,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="gel-douche" id="gel-douche" @if(in_array("gel-douche", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="gel-douche">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
                                                             <path d="M18 1v2h-7v2h1a2 2 0 0 1 1.995 1.85L14 7l.001 2.1a5.002 5.002 0 0 1 3.994 4.674L18 14v14a3 3 0 0 1-2.824 2.995L15 31H5a3 3 0 0 1-2.995-2.824L2 28V14a5.002 5.002 0 0 1 4-4.9V7a2 2 0 0 1 1.85-1.995L8 5h1V3H6V1h12zm-2 15.058c-1.143.147-2.085.595-3.577 1.552l-.348.225C9.64 19.424 8.293 19.995 6 19.995a9.003 9.003 0 0 1-2-.217V28a1 1 0 0 0 .883.993L5 29h10a1 1 0 0 0 .993-.883L16 28V16.058zM27 13a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-14-2H7a3 3 0 0 0-2.995 2.824L4 14v3.711a6.846 6.846 0 0 0 2 .284c1.633 0 2.64-.361 4.4-1.462l.638-.41c2.016-1.315 3.277-1.922 4.962-2.08V14a3 3 0 0 0-3-3zm14 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM25 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM12 7H8v2h4V7zm13-3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z">
                                                             </path>
@@ -163,7 +204,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="lave-linge" id="lave-linge" @if(in_array("lave-linge", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="lave-linge">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -180,7 +221,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="equipements-base" id="equipements-base" @if(in_array("equipements-base", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="equipements-base">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                             aria-hidden="true" role="presentation" focusable="false"
                                                             style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -197,7 +238,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="cintres" id="cintres" @if(in_array("cintres", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="cintres">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -213,7 +254,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="draps" id="draps" @if(in_array("draps", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="draps">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -230,7 +271,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="store" id="store" @if(in_array("store", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="store">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -246,7 +287,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="fer-a-repasser" id="fer-a-repasser" @if(in_array("fer-a-repasser", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="fer-a-repasser">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -263,7 +304,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="etendoir-a-linge" id="etendoir-a-linge" @if(in_array("etendoir-a-linge", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="etendoir-a-linge">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -279,7 +320,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="coffre-fort" id="coffre-fort" @if(in_array("coffre-fort", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="coffre-fort">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -295,7 +336,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="armoire" id="armoire" @if(in_array("armoire", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="armoire">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                              aria-hidden="true" role="presentation" focusable="false" 
                                                              style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -315,7 +356,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="tv" id="tv" @if(in_array("tv", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="tv">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -331,7 +372,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="sonos" id="sonos" @if(in_array("sonos", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="sonos">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -351,7 +392,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="cheminee" id="cheminee" @if(in_array("cheminee", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="cheminee">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -368,7 +409,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="chauffage" id="chauffage" @if(in_array("chauffage", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="chauffage">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -385,7 +426,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="climatisation" id="climatisation" @if(in_array("climatisation", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="climatisation">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -401,7 +442,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="ventilateur" id="ventilateur" @if(in_array("ventilateur", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="ventilateur">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -421,7 +462,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="detecteur-de-fumee" id="detecteur-de-fumee" @if(in_array("detecteur-de-fumee", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="detecteur-de-fumee">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -438,7 +479,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="extincteur" id="extincteur" @if(in_array("extincteur", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="extincteur">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -455,7 +496,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="kit-secours" id="kit-secours" @if(in_array("kit-secours", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="kit-secours">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -476,7 +517,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="wifi" id="wifi" @if(in_array("wifi", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="wifi">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -493,7 +534,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="espace-travail" id="espace-travail" @if(in_array("espace-travail", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="espace-travail">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -514,7 +555,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="cuisine" id="cuisine" @if(in_array("cuisine", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="cuisine">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -531,7 +572,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="refrigerateur" id="refrigerateur" @if(in_array("refrigerateur", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="refrigerateur">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -548,7 +589,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="four-micro-onde" id="four-micro-onde" @if(in_array("four-micro-onde", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="four-micro-onde">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -565,7 +606,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="equipement-cuisine" id="equipement-cuisine" @if(in_array("equipement-cuisine", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="equipement-cuisine">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -582,7 +623,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="vaisselle-couverts" id="vaisselle-couverts" @if(in_array("vaisselle-couverts", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="vaisselle-couverts">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -599,7 +640,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="mini-refrigerateur" id="mini-refrigerateur" @if(in_array("mini-refrigerateur", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="mini-refrigerateur">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                             aria-hidden="true" role="presentation" focusable="false" 
                                                             style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -615,7 +656,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="cuisiniere-induction" id="cuisiniere-induction" @if(in_array("cuisiniere-induction", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="cuisiniere-induction">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                             aria-hidden="true" role="presentation" focusable="false" 
                                                             style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -631,7 +672,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="bouilloire-electrique" id="bouilloire-electrique" @if(in_array("bouilloire-electrique", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="bouilloire-electrique">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -647,7 +688,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="grille-pain" id="grille-pain" @if(in_array("grille-pain", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="grille-pain">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -663,7 +704,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="vers_a_vin" id="vers_a_vin" @if(in_array("vers-a-vin", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="vers_a_vin">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -679,7 +720,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="ustensile-barbecue" id="ustensile-barbecue" @if(in_array("ustensile-barbecue", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="ustensile-barbecue">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -688,7 +729,7 @@
                                                             </svg>
                                                             Ustensiles de barbecue
                                                         </label>
-                                                            <span>Barbecue, charbon, brochettes en bambou ou en métal, etc.</span>
+                                                            <span for="ustensile-barbecue">Barbecue, charbon, brochettes en bambou ou en métal, etc.</span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -696,7 +737,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="table-a-manger" id="table-a-manger" @if(in_array("table-a-manger", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="table-a-manger">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -712,7 +753,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="cuisiniere" id="cuisiniere">
-                                                        <label>
+                                                        <label for="cuisiniere">
                                                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
                                                             <path d="M26 1a5 5 0 0 1 5 5c0 6.389-1.592 13.187-4 14.693V31h-2V20.694c-2.364-1.478-3.942-8.062-3.998-14.349L21 6l.005-.217A5 5 0 0 1 26 1zm-9 0v18.118c2.317.557 4 3.01 4 5.882 0 3.27-2.183 6-5 6s-5-2.73-5-6c0-2.872 1.683-5.326 4-5.882V1zM2 1h1c4.47 0 6.934 6.365 6.999 18.505L10 21H3.999L4 31H2zm14 20c-1.602 0-3 1.748-3 4s1.398 4 3 4 3-1.748 3-4-1.398-4-3-4zM4 3.239V19h3.995l-.017-.964-.027-.949C7.673 9.157 6.235 4.623 4.224 3.364l-.12-.07zm19.005 2.585L23 6l.002.31c.045 4.321 1.031 9.133 1.999 11.39V3.17a3.002 3.002 0 0 0-1.996 2.654zm3.996-2.653v14.526C27.99 15.387 29 10.4 29 6a3.001 3.001 0 0 0-2-2.829z">
                                                             </path>
@@ -726,7 +767,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="four" id="four" @if(in_array("four", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="four">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -742,7 +783,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="cafetiere" id="cafetiere" @if(in_array("cafetiere", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="cafetiere">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -763,7 +804,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="patio-balcon" id="patio-balcon" @if(in_array("patio-balcon", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="patio-balcon">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -780,7 +821,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="arriere-cour" id="arriere-cour" @if(in_array("arriere-cour", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="arriere-cour">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -797,7 +838,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="mobilier-exterieur" id="mobilier-exterieur" @if(in_array("mobilier-exterieur", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="mobilier-exterieur">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -813,7 +854,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="repas-plein-air" id="repas-plein-air" @if(in_array("repas-plein-air", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="repas-plein-air">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -829,7 +870,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="barbecue" id="barbecue" @if(in_array("barbecue", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="barbecue">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -846,7 +887,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="produits-plage" id="produits-plage" @if(in_array("produits-plage", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="produits-plage">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -863,7 +904,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="kayak" id="kayak" @if(in_array("kayak", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="kayak">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -883,7 +924,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="ascenseur" id="ascenseur" @if(in_array("ascenseur", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="ascenseur">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -899,7 +940,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="parking-gratuit" id="parking-gratuit" @if(in_array("parking-gratuit", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="parking-gratuit">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -916,7 +957,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="piscine" id="piscine" @if(in_array("piscine", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="piscine">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -933,7 +974,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="jacuzzi" id="jacuzzi" @if(in_array("jacuzzi", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="jacuzzi">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -950,7 +991,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="salon-privé" id="salon-privé" @if(in_array("salon-privé", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="salon-privé">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -970,7 +1011,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="arrivee-autonome" id="arrivee-autonome" @if(in_array("arrivee-autonome", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="arrivee-autonome">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -987,7 +1028,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="boite-cle" id="boite-cle" @if(in_array("boite-cle", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="boite-cle">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -1004,7 +1045,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="longue-duree" id="longue-duree" @if(in_array("longue-duree", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="longue-duree">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                                                 aria-hidden="true" role="presentation" focusable="false"
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -1021,7 +1062,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="camera" id="camera" @if(in_array("camera", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="camera">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -1037,7 +1078,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="petit-dej" id="petit-dej" @if(in_array("petit-dej", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="petit-dej">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -1058,7 +1099,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="entree-privee" id="entree-privee" @if(in_array("entree-privee", $tag)) checked="" @endif>
-                                                        <label>
+                                                        <label for="entree-privee">
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: inline; height: 24px; width: 24px; fill: currentcolor;">
@@ -1078,7 +1119,7 @@
                                                 <td style="text-align:left;">
                                                     <div class="custom-control">
                                                         <input class="form-check-input" type="checkbox" name="tag[]" value="detecteur-monoxyde" id="detecteur-monoxyde" @if(in_array("detecteur-monoxyde", $tag)) checked="" @endif>
-                                                        <label>                           
+                                                        <label for="detecteur-monoxyde">                           
                                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" 
                                                                 aria-hidden="true" role="presentation" focusable="false" 
                                                                 style="display: block; height: 24px; width: 24px; fill: currentcolor;">
@@ -1105,43 +1146,66 @@
 
 @section('scripts')
     <script>
+        const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
+
+        document.querySelectorAll('.deletePhoto').forEach(el => {
+            el.addEventListener("click", e => {
+                if(!confirm('Voulez vous supprimer cette photo ?')) return
+                fetch("http://127.0.0.1:8000/delete-photo/{{ $property->id }}/" + e.target.dataset.photo, { 
+                    method: 'delete', 
+                    headers: {"X-CSRF-Token" : csrfToken}
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setTimeout(() => {
+                            let displayAlert = document.querySelector('#displayAlert')
+                            var item = document.querySelector('.container');
+                            item.scrollIntoView();
+                            displayAlert.innerHTML = `<p>${data.message}</p>`
+                            displayAlert.style.display = 'block'
+                            document.location.href = data.redirect
+                        }, 2000);
+                    })
+            })
+        })
+
+
             let dates = [];
             let oldDates = JSON.parse('{!! $property->dates !!}')
-                console.log(oldDates);
             var calendar = new ej.calendars.Calendar({
                 isMultiSelection: true,
-                values: oldDates
+                values: oldDates.split(',')
             });
+            console.log(oldDates);
             
             console.log(calendar.values);
 
             calendar.appendTo('#element');
 
             calendar.addEventListener("change", e => {
-            Array.from(e.values).map(date => dates.push(moment(date).format("YYYY/MM/DD")))
+                Array.from(e.values).map(date => dates.push(moment(date).format("YYYY/MM/DD")))
                 console.log(dates);
             })
 
-            document.querySelector('#storeProperty').addEventListener('submit', e =>{ 
-            e.preventDefault()
+            document.querySelector('#updateProperty').addEventListener('submit', e =>{ 
+                e.preventDefault()
 
-            let formData = new FormData(document.querySelector('#storeProperty'))
-            formData.append('dates', dates)
+                let formData = new FormData(document.querySelector('#updateProperty'))
+                formData.append('dates', dates)
 
-            fetch("{{ route('updated', $property->id) }}", { method: 'post', body: formData })
-                .then(res => res.json())
-                .then(data => {
-                    setTimeout(() => {
-                        let displayAlert = document.querySelector('#displayAlert')
-                        
-                        var item = document.getElementById('container');
-                        item.scrollIntoView();
-                        displayAlert.innerHTML = `<p>${data.message}</p>`
-                        displayAlert.style.display = 'block'
-                        document.location.href = data.redirect
-                    }, 2000);
-                }
-            )
-        })
+                fetch("{{ route('updated', $property->id) }}", { method: 'post', body: formData })
+                    .then(res => res.json())
+                    .then(data => {
+                        setTimeout(() => {
+                            let displayAlert = document.querySelector('#displayAlert')
+                            var item = document.querySelector('.container');
+                            item.scrollIntoView();
+                            displayAlert.innerHTML = `<p>${data.message}</p>`
+                            displayAlert.style.display = 'block'
+                            document.location.href = data.redirect
+                        }, 2000);
+                    }
+                )
+            })
     </script>
 @endsection

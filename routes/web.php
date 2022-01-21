@@ -39,6 +39,7 @@ Route::patch('/update/{id}', [App\Http\Controllers\PropertyController::class, 'u
 Route::delete('/delete/{property}', [App\Http\Controllers\PropertyController::class, 'delete'])->name('delete');
 
 
+Route::delete('/delete-photo/{property}/{photo}', [App\Http\Controllers\PropertyController::class, 'deletePhoto']);
 
 
 

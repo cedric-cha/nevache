@@ -17,8 +17,13 @@ class CreatePropertiesTable extends Migration
             $table->id();
             $table->text("titre");
             $table->json("image");
+            $table->json('photos');
             $table->text("description");
             $table->text("capacite");
+            $table->text("tarifs");
+            $table->text("taxes_sejour");
+            $table->text("options_possibles");
+            $table->text("autre_option");
             $table->json("tag");
             $table->json("dates");
             $table->timestamps();

@@ -20,7 +20,11 @@ class Property extends Model
         'image',
         'description',
         'capacite',
-        'photo',
+        'tarifs',
+        'taxes_sejour',
+        'options_possibles',
+        'autre_option',
+        'photos',
         'tag',
         'dates'
     ];

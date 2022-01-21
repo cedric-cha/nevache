@@ -97,7 +97,7 @@
                 textDiv2.textContent = properties[i].capacite + ' RSV';
 
                 var link = 'http://127.0.0.1:8000'
-
+ 
                 var a = document.createElement('a');
                 a.href= link + '/details/' + properties[i].id;
                 /* Image */
@@ -116,6 +116,5 @@
                 _div.appendChild(textDiv2);
                 parentdiv.appendChild(_div);
             }
-
         </script>
     @endsection
