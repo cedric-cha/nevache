@@ -1,5 +1,5 @@
 <div class="row row-cols-1 row-cols-md-2 g-4">
-  @isset($properties[13])
+  @isset($properties[12])
     <div class="col-md-3 mb-2">
       <div class="card">
         <img src="{{ url('storage/img/'.$properties[12]->image) }}" class="card-img-top">
@@ -8,11 +8,11 @@
           <p class="card-text">{{ $properties[12]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[12]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[12]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[12]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -28,11 +28,11 @@
           <p class="card-text">{{ $properties[13]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[13]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[13]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[13]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -48,11 +48,11 @@
           <p class="card-text">{{ $properties[14]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[14]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[14]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[14]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -68,11 +68,11 @@
           <p class="card-text">{{ $properties[15]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[15]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[15]->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[15]->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" onclick="confirm('')" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -90,11 +90,11 @@
           <p class="card-text">{{ $properties[0]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[0]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[0]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[0]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -110,11 +110,11 @@
           <p class="card-text">{{ $properties[1]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[1]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[1]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[1]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -130,11 +130,11 @@
           <p class="card-text">{{ $properties[2]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[2]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[2]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[2]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -150,11 +150,11 @@
           <p class="card-text">{{ $properties[3]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[3]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[3]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[3]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -171,11 +171,11 @@
           <p class="card-text">{{ $properties[4]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[4]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[4]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[4]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -191,11 +191,11 @@
           <p class="card-text">{{ $properties[5]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[5]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[5]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[5]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -211,11 +211,11 @@
           <p class="card-text">{{ $properties[6]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[6]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[6]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[6]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -231,11 +231,11 @@
           <p class="card-text">{{ $properties[7]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[7]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[7]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[7]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -253,11 +253,11 @@
           <p class="card-text">{{ $properties[8]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[8]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[8]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[8]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -273,11 +273,11 @@
           <p class="card-text">{{ $properties[9]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[9]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[9]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[9]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -293,11 +293,11 @@
           <p class="card-text">{{ $properties[10]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[10]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[10]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[10]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -313,11 +313,11 @@
           <p class="card-text">{{ $properties[11]->description }}</p>
           <div class="text-center">
             <a href="{{ url('edit-property', $properties[11]->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-            <form id="delete-form" action="{{ route('delete', $properties[11]->id) }}" method="POST">
+            <!-- <form id="delete-form" action="{{ route('delete', $properties[11]->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>

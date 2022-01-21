@@ -13,6 +13,14 @@
 
  /* Example - styles */
  
+ .img-header {
+  position: absolute;
+}
+.img-header:nth-of-type(2) {
+  -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
 .content {
   position: relative;
   text-align: center;
@@ -11552,7 +11560,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/header-bg.jpeg");
+  background-image: url("../assets/img/LVN2.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;

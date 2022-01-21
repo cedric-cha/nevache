@@ -1,6 +1,14 @@
  <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top" id="mainNav">
+    <div class="container" style="display:flex;justify-content:space-between;">
+        <span class="text-left" style="color:black;">
+            <i class="fas fa-phone-alt"></i>
+            +33(0)7 89 52 89 87
+        </span>
+        <span class="text-right" style="padding-left:20px;color:black">
+            <i class="fas fa-envelope"></i>
+             douniaevents05@gmail.com
+        </span>
         <!-- <a class="navbar-brand" href="#page-top"><h1>LOGO</h1></a> -->
         <!-- <a class="navbar-brand" href="#page-top"><img src="{{url('assets/img/navbar-logo.svg')}}" alt="..." /></a> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

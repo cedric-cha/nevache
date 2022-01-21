@@ -15,14 +15,9 @@ use App\Http\Controllers\PropertyController;
 |
 */
 
-
-
-
 Route::get('/admin', [App\Http\Controllers\PropertyController::class, 'index'])->name('admin');
 
-
 Route::get('/edit-property/{id}', [App\Http\Controllers\PropertyController::class, 'edit'])->name('edit');
-
 
 Route::get('/annonce/{id}', function () {
     return view('property');
@@ -38,10 +33,15 @@ Route::post('/store', [App\Http\Controllers\PropertyController::class, 'store'])
 Route::patch('/update/{id}', [App\Http\Controllers\PropertyController::class, 'update'])->name('updated');
 Route::delete('/delete/{property}', [App\Http\Controllers\PropertyController::class, 'delete'])->name('delete');
 
-
 Route::delete('/delete-photo/{property}/{photo}', [App\Http\Controllers\PropertyController::class, 'deletePhoto']);
 
+Route::get('/mentions-legales', function (){
+    return view('mentions-legales');
+});
 
+Route::get('/politique-de-confidentialites', function (){
+    return view('politiques');
+});
 
 
 

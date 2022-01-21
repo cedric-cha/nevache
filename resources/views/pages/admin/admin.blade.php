@@ -14,27 +14,7 @@
 
             <!-- LISTE DES ANNONCES  -->
                 <div class="tab-pane fade show active p-4" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                    <div class="row row-cols-1 row-cols-md-2 g-4">
-                        @foreach($properties as $property)
-                            <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="{{ url('storage/img/'.$property->image) }}" class="card-img-top">
-                                <div class="card-body">
-                                <h5 class="card-title">{{ $property->titre }}</h5>
-                                <p class="card-text">{{ $property->description }}</p>
-                                <div class="text-center">
-                                    <a href="{{ url('edit-property', $property->id) }}" class="btn btn-warning mb-2 btn-sm">Modifier</a>
-                                    <form id="delete-form" action="{{ route('delete',$property->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger mb-2 btn-sm">Supprimer</button>
-                                    </form>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    @include('pages.admin.card')
                 </div>
                     
                 <!-- AJOUTER UNE ANNONCE -->
