@@ -6,6 +6,7 @@ use App\Models\Property;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
@@ -51,8 +52,10 @@ class PropertyController extends Controller
         $image = $request->file('image');
 
         if (!$image) abort(404);
+        
+        $filename = Str::uuid()->toString() . '.' . $image->getClientOriginalExtension();
 
-        $image->move(storage_path('app/public/img'), $image->getClientOriginalName());
+        $image->move(storage_path('app/public/img'), $filename);
 ////////////////////////////////////////////
         $photos =  $request->file('photos');
 
@@ -61,7 +64,7 @@ class PropertyController extends Controller
         if($photos)
         {
             foreach ($photos as $photo) {
-                $name = $photo->getClientOriginalName();
+                $name = Str::uuid()->toString() . '.' . $photo->getClientOriginalExtension();
                 $photo->move(storage_path('app/public/photos'), $name);
                 $Files[] = $name;
             };
@@ -70,7 +73,7 @@ class PropertyController extends Controller
 
         Property::create([
                 'titre' => $request->titre,
-                'image' => $image->getClientOriginalName(),
+                'image' => $filename,
                 'description' => $request->description,
                 'capacite' => $request->capacite,
                 'tarifs' => $request->tarifs ,
@@ -143,9 +146,11 @@ class PropertyController extends Controller
         ];
         
         $image = $request->file('image');
+        
         if ($image) {
-            $image->move(storage_path('app/public/img'));
-            $data['image'] = $image->getClientOriginalName();
+            $name = Str::uuid()->toString() . '.' . $image->getClientOriginalExtension();
+            $image->move(storage_path('app/public/img'), $name);
+            $data['image'] = $name;
         }
 
         $photos = $request->file('photos');
@@ -154,7 +159,7 @@ class PropertyController extends Controller
             $Files = array();
 
             foreach ($photos as $photo) {
-                $name = $photo->getClientOriginalName();
+                $name = Str::uuid()->toString() . '.' . $photo->getClientOriginalExtension();
                 $photo->move(storage_path('app/public/photos'), $name);
                 $Files[] = $name;
             };
@@ -164,14 +169,14 @@ class PropertyController extends Controller
 
             $Files = array_merge($Files, $_photos);
 
-            $data['photos'] =  json_encode($Files);
+            $data['photos'] = json_encode($Files);
         }
 
         $property->update($data);
 
         return response()->json([
-         'message' => 'Annonce mise  à jour !',
-             'redirect' => route('edit', $property->id)
+            'message' => 'Annonce mise  à jour !',   
+            'redirect' => route('admin')
          ]);
 
     }

@@ -1,11 +1,11 @@
  <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top" id="mainNav">
-    <div class="container" style="display:flex;justify-content:space-between;">
-        <span class="text-left" style="color:black;">
+    <div class="container">
+        <span class="col-md-3" style="color:black;">
             <i class="fas fa-phone-alt"></i>
             +33(0)7 89 52 89 87
         </span>
-        <span class="text-right" style="padding-left:20px;color:black">
+        <span class="offset-md-6" style="color:black;">
             <i class="fas fa-envelope"></i>
              douniaevents05@gmail.com
         </span>

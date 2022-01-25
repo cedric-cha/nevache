@@ -29,7 +29,7 @@
                 <div class="carousel-inner">
                     @foreach($photos as $key => $photo )
                         <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
-                            <img class="d-block w-100 mt-3" src="{{ url('storage/photos/'.$photo) }}">
+                            <img class="d-block w-100 mt-3" height="480px" src="{{ url('storage/photos/'.$photo) }}">
                         </div>
                     @endforeach
                 </div>
@@ -1466,7 +1466,7 @@
             let oldDates = JSON.parse('{!! $property->dates !!}')
 
             var calendar = new ej.calendars.Calendar({
-                isMultiSelection: true,
+                isMultiSelection: false,
                 values: oldDates.split(',')
             });
             calendar.appendTo('#element');

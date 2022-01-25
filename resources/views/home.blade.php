@@ -71,7 +71,7 @@
 
             });
 
-            let properties = JSON.parse('{!! $properties !!}')
+            let properties = JSON.parse('{!! $properties !!}');
             var div = 360 / 16;
             var radius = 525;
             var parentdiv = document.getElementById('parentdiv');
@@ -82,7 +82,7 @@
             for (var i = 0; i <= 15; ++i) {
                 var _div = document.createElement('div')
                 var childdiv = document.createElement('img');
-                var textDiv = document.createElement('h5');
+                var textDiv = document.createElement('p');
                 var textDiv2 = document.createElement('span');
                 var y = Math.sin((div * i) * (Math.PI / 180)) * radius;
                 var x = Math.cos((div * i) * (Math.PI / 180)) * radius;
@@ -94,7 +94,7 @@
                 textDiv2.style.justifyContent = 'center';
                 _div.style.color = 'white';
                 textDiv.textContent = properties[i].titre;
-                textDiv2.textContent = properties[i].capacite + ' RSV';
+                textDiv2.textContent = properties[i].capacite + ' ';
 
                 var link = 'http://127.0.0.1:8000'
  
@@ -107,8 +107,54 @@
                 /* Texte */
                 textDiv.style.top = (y + totalOffset + 25).toString() + "px" ;
                 textDiv.style.left = (x + totalOffset + 50).toString() + "px";
-                textDiv2.style.top = (y + totalOffset + 150).toString() + "px" ;
+                textDiv2.style.top = (y + totalOffset + 120).toString() + "px" ;
                 textDiv2.style.left = (x + totalOffset + 60).toString() + "px";
+                
+                if(i==1){
+                    textDiv.style.left ="655.037px";
+                }
+                
+                if(i==3){
+                    textDiv.style.left = "375.909px";
+                }
+                if(i==4){
+                    textDiv.style.top = "651px";
+                    textDiv.style.left = "160px";
+                    textDiv2.style.top = "736.037px";
+                    textDiv2.style.left = "159.9088px";
+                }
+                if(i==5){
+                    textDiv.style.top = "630.037px";
+                    textDiv.style.left = "-38px";
+                    textDiv2.style.top = "736.037px";
+                    textDiv2.style.left = "-59.9088px";
+                }
+                if(i==6){
+                    textDiv.style.top = "500.037px";
+                    textDiv.style.left = "-225px";
+                    textDiv2.style.top = "625.231px";
+                    textDiv2.style.left = "-230.231px";
+                }
+                if(i==7){
+                    textDiv.style.left = "-344.037px";
+                    textDiv2.style.top = "441.909px";
+                    textDiv2.style.left = "-344.037px";
+                }
+                if(i==8){
+                    textDiv2.style.left = "-410px";
+                }
+                if(i==9){
+                    textDiv.style.left = "-324.037px";
+                    textDiv2.style.top = "40.0912px";
+                    textDiv2.style.left = "-330.037px";
+                }
+                if(i==10){
+                    textDiv.style.left = "-230.231px";
+                    textDiv2.style.left = "-255.231px";
+                }
+                if(i==15){
+                    textDiv.style.left = "670.037px";
+                }
                 
                 a.appendChild(childdiv);
                 _div.appendChild(a);

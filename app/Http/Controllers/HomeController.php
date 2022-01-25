@@ -35,7 +35,7 @@ class HomeController extends Controller
             return $property;
         });
 
-        $properties = json_encode($properties);
+        $properties = json_encode($properties, JSON_HEX_APOS);
 
         //dd($properties, $_properties);
 

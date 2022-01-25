@@ -16,14 +16,14 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->text("titre");
-            $table->json("image");
+            $table->string("image");
             $table->json('photos');
             $table->text("description");
             $table->text("capacite");
             $table->text("tarifs");
             $table->text("taxes_sejour");
             $table->text("options_possibles");
-            $table->text("autre_option");
+            $table->text("autre_option")->nullable();
             $table->json("tag");
             $table->json("dates");
             $table->timestamps();
